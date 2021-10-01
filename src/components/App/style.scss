@@ -1,4 +1,6 @@
-body {
+.tracker {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
   font-family: "Rubik", sans-serif;
 }

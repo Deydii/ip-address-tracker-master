@@ -2,10 +2,11 @@
 
 .content {
   display: flex;
+  position: relative;
+  z-index: 15;
   width: 90%;
   max-width: 890px;
   height: 130px;
-  margin-top: 10px;
   background: white;
   border-radius: 10px;
   &__section {
