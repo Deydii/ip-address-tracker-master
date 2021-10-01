@@ -1,34 +1,45 @@
+import PropTypes from 'prop-types';
+
 import "./style.scss";
 
-const TrackerInformations = () => {
+const TrackerInformations = ({ infos }) => {
   return (
     <div className="content">
       <div className="content__section">
         <h5 className="content__title">IP address</h5>
         <br />
-        <p className="content__text">192.212.174.101</p>
+        <p className="content__text">{infos.ipAddress}</p>
       </div>
       <div className="content__section">
         <h5 className="content__title">Location</h5>
         <br />
-        <p className="content__text">Brooklyn, NY</p>
+        <p className="content__text">{infos.city}, {infos.country}</p>
         <br />
-        <p className="content__text">10001</p>
+        <p className="content__text">{infos.postalCode}</p>
       </div>
       <div className="content__section">
         <h5 className="content__title">Timezone</h5>
         <br />
-        <p className="content__text">UTC -05:00</p>
+        <p className="content__text">UTC {infos.timezone}</p>
       </div>
       <div className="content__section">
         <h5 className="content__title">ISP</h5>
         <br />
-        <p className="content__text">SpaceX</p>
-        <br />
-        <p className="content__text">Starlink</p>
-      </div>
+        <p className="content__text">{infos.isp}</p>
+        </div>
     </div>
   );
+};
+
+TrackerInformations.propTypes = {
+  infos: PropTypes.shape({
+    ipAddress: PropTypes.string,
+    country: PropTypes.string,
+    city: PropTypes.string,
+    postalCode: PropTypes.string,
+    timezone: PropTypes.string,
+    isp: PropTypes.string
+  }).isRequired,
 };
 
 export default TrackerInformations;
