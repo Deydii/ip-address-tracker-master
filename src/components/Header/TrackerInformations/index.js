@@ -8,7 +8,7 @@ const TrackerInformations = ({ infos }) => {
       <div className="content__section">
         <h5 className="content__title">IP address</h5>
         <br />
-        <p className="content__text">{infos.ipAddress}</p>
+        <p className="content__text" data-testid="ip">{infos.ipAddress}</p>
       </div>
       <div className="content__section">
         <h5 className="content__title">Location</h5>
