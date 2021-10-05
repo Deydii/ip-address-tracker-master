@@ -9,6 +9,7 @@ import './style.scss';
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [infos, setInfos] = useState({});
+  const [inputValue, setInputValue] = useState("");
 
   // Get user's info in first render
   const getInfosInFirstRender = () => {
@@ -33,13 +34,21 @@ const App = () => {
       .finally(() => setLoading(false));
   };
 
+  const onChangeInputValue = (value) => {
+    setInputValue(value)
+  };
+
   useEffect(() => getInfosInFirstRender(), []);
 
   return (
     <div className="tracker">
     {!loading && (
       <>
-        <Header infos={infos} />
+        <Header 
+          infos={infos}
+          inputValue={inputValue}
+          onChangeInputValue={onChangeInputValue}
+        />
         <TrackerMap />
       </>
     )}

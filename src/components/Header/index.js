@@ -4,7 +4,11 @@ import background from '../../assets/images/pattern-bg.png';
 
 import './style.scss';
 
-const Header = ({ infos }) => {
+const Header = ({ 
+  infos,
+  inputValue, 
+  onChangeInputValue,
+}) => {
   return (
     <header className="header">
       <img
@@ -14,7 +18,10 @@ const Header = ({ infos }) => {
       />
       <div className="header__section">
         <h3 className="header__section--title">IP Address Tracker</h3>
-        <TrackerForm />
+        <TrackerForm 
+          inputValue={inputValue}
+          onChangeInputValue={onChangeInputValue}
+        />
         <TrackerInformations infos={infos} />
       </div>
     </header>

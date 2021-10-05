@@ -1,8 +1,14 @@
+import PropTypes from 'prop-types';
+
 import arrow from '../../../assets/images/icon-arrow.svg';
 
 import './style.scss';
 
-const TrackerForm = () => {
+const TrackerForm = ({ 
+  inputValue, 
+  onChangeInputValue,
+ }) => {
+
   return (
     <form 
       className="form"
@@ -10,8 +16,10 @@ const TrackerForm = () => {
       <input
         className="form__input"
         type="text"
+        required
         placeholder="Search for any IP address or domain"
-        value=""
+        value={inputValue}
+        onChange={(e) => onChangeInputValue(e.target.value)}
       />
       <button className="form__button" type="submit">
         <img
@@ -22,6 +30,11 @@ const TrackerForm = () => {
       </button>
     </form>
   );
+};
+
+TrackerForm.propTypes = {
+  inputValue: PropTypes.string.isRequired,
+  onChangeInputValue: PropTypes.func.isRequired,
 };
 
 export default TrackerForm;
