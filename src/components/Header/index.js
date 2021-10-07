@@ -8,6 +8,7 @@ const Header = ({
   userIpInfos,
   inputValue, 
   onChangeInputValue,
+  searchIpInfos
 }) => {
   return (
     <header className="header">
@@ -21,6 +22,7 @@ const Header = ({
         <TrackerForm 
           inputValue={inputValue}
           onChangeInputValue={onChangeInputValue}
+          searchIpInfos={searchIpInfos}
         />
         <TrackerInformations userIpInfos={userIpInfos} />
       </div>

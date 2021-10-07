@@ -7,11 +7,18 @@ import './style.scss';
 const TrackerForm = ({ 
   inputValue, 
   onChangeInputValue,
+  searchIpInfos
  }) => {
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    searchIpInfos(inputValue)
+  };
 
   return (
     <form 
       className="form"
+      onSubmit={handleSubmit}
     >
       <input
         className="form__input"
@@ -35,6 +42,7 @@ const TrackerForm = ({
 TrackerForm.propTypes = {
   inputValue: PropTypes.string.isRequired,
   onChangeInputValue: PropTypes.func.isRequired,
+  searchIpInfos: PropTypes.func.isRequired,
 };
 
 export default TrackerForm;

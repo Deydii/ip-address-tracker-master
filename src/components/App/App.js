@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react';
-// import axios from 'axios';
-
+import axios from 'axios';
 import useLoadData from '../../Hooks/';
-// import ipRegex from 'ip-regex';
-
 import Header from '../Header';
 import TrackerMap from '../Map';
 
-import "./style.scss";
+import './style.scss';
 
 const App = () => {
   const [loading, infos] = useLoadData();
   const [ipInfos, setIpInfos] = useState({});
   const [inputValue, setInputValue] = useState("");
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const getInfosInFirstRender = () => {
     if (infos) {
@@ -25,7 +24,7 @@ const App = () => {
         longitude: infos.longitude,
         timezone: infos.timezone,
         isp: infos.isp,
-      })
+      });
     }
   };
 
@@ -33,23 +32,58 @@ const App = () => {
     setInputValue(value);
   };
 
+  const searchIpInfos = (value) => {
+    axios
+      .get(`http://ipwhois.app/json/${value}`)
+      .then((response) => {
+        console.log(response);
+        switch (response.data.message) {
+          case "invalid IP address": 
+            setError(true);
+            setErrorMessage("Invalid IP address");
+            break;
+          case "you've hit the monthly limit":
+            setError(true);
+            setErrorMessage("Monthly API request has been reached.");
+            break;
+          default: 
+            setError(false);
+            setErrorMessage("");
+            setIpInfos({
+              ...ipInfos,
+              ipAddress: response.data.ip,
+              country: response.data.country_code,
+              city: response.data.city,
+              latitude: response.data.latitude,
+              longitude: response.data.longitude,
+              timezone: response.data.timezone_gmt.slice(4),
+              isp: response.data.isp,
+            });
+          }
+      })
+      .catch((data) => {
+        console.log(data)
+      });
+  };
+
   useEffect(() => {
     getInfosInFirstRender();
-   // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [infos]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [infos]);
 
   return (
     <div className="tracker">
       {!loading && (
-      <>
-        <Header
-          userIpInfos={ipInfos}
-          inputValue={inputValue}
-          onChangeInputValue={onChangeInputValue}
-        />
-        <TrackerMap />
-      </>
-     )}
+        <>
+          <Header
+            userIpInfos={ipInfos}
+            inputValue={inputValue}
+            onChangeInputValue={onChangeInputValue}
+            searchIpInfos={searchIpInfos}
+          />
+          <TrackerMap />
+        </>
+      )}
     </div>
   );
 };
