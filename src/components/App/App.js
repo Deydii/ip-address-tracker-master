@@ -23,7 +23,7 @@ const App = () => {
         city: infos.city,
         latitude: infos.latitude,
         longitude: infos.longitude,
-        timezone: infos.timezone_gmt,
+        timezone: infos.timezone,
         isp: infos.isp,
       })
     }
