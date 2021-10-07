@@ -8,7 +8,9 @@ const Header = ({
   userIpInfos,
   inputValue, 
   onChangeInputValue,
-  searchIpInfos
+  searchIpInfos,
+  error,
+  errorMessage
 }) => {
   return (
     <header className="header">
@@ -23,6 +25,8 @@ const Header = ({
           inputValue={inputValue}
           onChangeInputValue={onChangeInputValue}
           searchIpInfos={searchIpInfos}
+          error={error}
+          errorMessage={errorMessage}
         />
         <TrackerInformations userIpInfos={userIpInfos} />
       </div>

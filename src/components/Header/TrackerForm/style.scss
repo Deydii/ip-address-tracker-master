@@ -38,4 +38,27 @@
       background: v.$color-very-dark-gray;
     }
   }
+  &__message {
+    position: absolute;
+    top: 42%;
+    animation: .3s linear slide-in;
+    &--hide {
+      display: none;
+    }
+    &--error {
+      color: red;
+      font-size: 15px;
+    }
+  }
+}
+
+@keyframes slide-in {
+  from {
+    top: 38%;
+    opacity: 0;
+  }
+  to {
+    top: 42%;
+    opacity: 1;
+  }
 }

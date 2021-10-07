@@ -29,6 +29,8 @@ const App = () => {
   };
 
   const onChangeInputValue = (value) => {
+    setError(false);
+    setErrorMessage("");
     setInputValue(value);
   };
 
@@ -80,6 +82,8 @@ const App = () => {
             inputValue={inputValue}
             onChangeInputValue={onChangeInputValue}
             searchIpInfos={searchIpInfos}
+            error={error}
+            errorMessage={errorMessage}
           />
           <TrackerMap />
         </>

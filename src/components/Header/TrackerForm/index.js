@@ -7,7 +7,9 @@ import './style.scss';
 const TrackerForm = ({ 
   inputValue, 
   onChangeInputValue,
-  searchIpInfos
+  searchIpInfos,
+  error,
+  errorMessage
  }) => {
 
   const handleSubmit = (e) => {
@@ -16,6 +18,7 @@ const TrackerForm = ({
   };
 
   return (
+    <>
     <form 
       className="form"
       onSubmit={handleSubmit}
@@ -36,6 +39,12 @@ const TrackerForm = ({
         />
       </button>
     </form>
+    <div className={error ? "form__message" : "form__message--hide"}>
+      <p className="form__message--error">
+        {errorMessage}
+      </p>
+    </div>
+    </>
   );
 };
 
@@ -43,6 +52,8 @@ TrackerForm.propTypes = {
   inputValue: PropTypes.string.isRequired,
   onChangeInputValue: PropTypes.func.isRequired,
   searchIpInfos: PropTypes.func.isRequired,
+  error: PropTypes.bool.isRequired,
+  errorMessage: PropTypes.string.isRequired
 };
 
 export default TrackerForm;
