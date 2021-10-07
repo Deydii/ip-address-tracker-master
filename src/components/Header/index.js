@@ -5,7 +5,7 @@ import background from '../../assets/images/pattern-bg.png';
 import './style.scss';
 
 const Header = ({ 
-  infos,
+  userIpInfos,
   inputValue, 
   onChangeInputValue,
 }) => {
@@ -22,7 +22,7 @@ const Header = ({
           inputValue={inputValue}
           onChangeInputValue={onChangeInputValue}
         />
-        <TrackerInformations infos={infos} />
+        <TrackerInformations userIpInfos={userIpInfos} />
       </div>
     </header>
   );

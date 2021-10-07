@@ -1,57 +1,55 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+
+import useLoadData from '../../Hooks/';
+// import ipRegex from 'ip-regex';
 
 import Header from '../Header';
 import TrackerMap from '../Map';
 
-import './style.scss';
+import "./style.scss";
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
-  const [infos, setInfos] = useState({});
+  const [loading, infos] = useLoadData();
+  const [ipInfos, setIpInfos] = useState({});
   const [inputValue, setInputValue] = useState("");
 
-  // Get user's info in first render
   const getInfosInFirstRender = () => {
-    axios
-      .get(
-        `${process.env.REACT_APP_API_URL}?apiKey=${process.env.REACT_APP_API_KEY}`
-      )
-      .then((response) => {
-        setInfos({
-          ...infos,
-          ipAddress: response.data.ip,
-          country: response.data.location.country,
-          city: response.data.location.city,
-          postalCode: response.data.location.postalCode,
-          latitude: response.data.location.lat,
-          longitude: response.data.location.lng,
-          timezone: response.data.location.timezone,
-          isp: response.data.isp,
-        });
+    if (infos) {
+      setIpInfos({
+        ...ipInfos,
+        ipAddress: infos.ipAddress,
+        country: infos.country,
+        city: infos.city,
+        latitude: infos.latitude,
+        longitude: infos.longitude,
+        timezone: infos.timezone_gmt,
+        isp: infos.isp,
       })
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false));
+    }
   };
 
   const onChangeInputValue = (value) => {
-    setInputValue(value)
+    setInputValue(value);
   };
 
-  useEffect(() => getInfosInFirstRender(), []);
+  useEffect(() => {
+    getInfosInFirstRender();
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [infos]);
 
   return (
     <div className="tracker">
-    {!loading && (
+      {!loading && (
       <>
-        <Header 
-          infos={infos}
+        <Header
+          userIpInfos={ipInfos}
           inputValue={inputValue}
           onChangeInputValue={onChangeInputValue}
         />
         <TrackerMap />
       </>
-    )}
+     )}
     </div>
   );
 };

@@ -2,37 +2,35 @@ import PropTypes from 'prop-types';
 
 import "./style.scss";
 
-const TrackerInformations = ({ infos }) => {
+const TrackerInformations = ({ userIpInfos }) => {
   return (
     <div className="content">
       <div className="content__section">
         <h5 className="content__title">IP address</h5>
         <br />
-        <p className="content__text" data-testid="ip">{infos.ipAddress}</p>
+        <p className="content__text" data-testid="ip">{userIpInfos.ipAddress}</p>
       </div>
       <div className="content__section">
         <h5 className="content__title">Location</h5>
         <br />
-        <p className="content__text">{infos.city}, {infos.country}</p>
-        <br />
-        <p className="content__text">{infos.postalCode}</p>
+        <p className="content__text">{userIpInfos.city}, {userIpInfos.country}</p>
       </div>
       <div className="content__section">
         <h5 className="content__title">Timezone</h5>
         <br />
-        <p className="content__text">UTC {infos.timezone}</p>
+        <p className="content__text">UTC {userIpInfos.timezone}</p>
       </div>
       <div className="content__section">
         <h5 className="content__title">ISP</h5>
         <br />
-        <p className="content__text">{infos.isp}</p>
+        <p className="content__text">{userIpInfos.isp}</p>
         </div>
     </div>
   );
 };
 
 TrackerInformations.propTypes = {
-  infos: PropTypes.shape({
+  userIpInfos: PropTypes.shape({
     ipAddress: PropTypes.string,
     country: PropTypes.string,
     city: PropTypes.string,
