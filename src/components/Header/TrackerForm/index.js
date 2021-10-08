@@ -39,7 +39,10 @@ const TrackerForm = ({
         />
       </button>
     </form>
-    <div className={error ? "form__message" : "form__message--hide"}>
+    <div 
+      className={error ? "form__message" : "form__message--hide"}
+      data-testid="error-message"
+    >
       <p className="form__message--error">
         {errorMessage}
       </p>

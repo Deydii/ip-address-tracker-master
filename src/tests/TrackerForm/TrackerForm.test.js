@@ -67,5 +67,38 @@ describe('Tracker Form component', () => {
     userEvent.type(inputEl, '{enter}')
     
     expect(handleSubmit).toHaveBeenCalled();
-  })
+  });
+
+  test('Error message should be equal to errorMessage prop if ip address or domain is invalid', () => {
+    render(
+      <TrackerForm
+        inputValue="90.90.43."
+        onChangeInputValue={jest.fn()}
+        searchIpInfos={jest.fn()}
+        error={true}
+        errorMessage="Invalid IP address"
+      />
+    );
+
+  const divEl = screen.getByTestId("error-message");
+  expect(divEl).toHaveTextContent("Invalid IP address");
+  });
+
+  test('Error message should have form__message--hide className when user is typing', () => {
+    render(
+      <TrackerForm
+        inputValue=""
+        onChangeInputValue={jest.fn()}
+        searchIpInfos={jest.fn()}
+        error={false}
+        errorMessage=""
+      />
+    );
+    
+    const inputEl = screen.getByRole("textbox");
+    const divEl = screen.getByTestId("error-message");
+    userEvent.type(inputEl, "90.90.43.12");
+
+    expect(divEl).toHaveClass("form__message--hide");
+  });
 });
