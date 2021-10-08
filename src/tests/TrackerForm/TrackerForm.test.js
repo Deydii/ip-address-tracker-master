@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import TrackerForm from '../../Header/TrackerForm';
+import TrackerForm from '../../components/Header/TrackerForm';
 
 describe('Tracker Form component', () => {
   test('It should render tracker form component', () => {
