@@ -38,7 +38,6 @@ const App = () => {
     axios
       .get(`http://ipwhois.app/json/${value}`)
       .then((response) => {
-        console.log(response);
         switch (response.data.message) {
           case "invalid IP address": 
             setError(true);
@@ -63,9 +62,7 @@ const App = () => {
             });
           }
       })
-      .catch((data) => {
-        console.log(data)
-      });
+      .catch((error) => console.log(error));
   };
 
   useEffect(() => {
@@ -85,7 +82,10 @@ const App = () => {
             error={error}
             errorMessage={errorMessage}
           />
-          <TrackerMap />
+          <TrackerMap 
+            latitude={ipInfos.latitude}
+            longitude={ipInfos.longitude}
+          />
         </>
       )}
     </div>

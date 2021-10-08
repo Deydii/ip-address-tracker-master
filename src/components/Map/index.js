@@ -1,20 +1,22 @@
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import { MarkerIcon } from './MarkerIcon';
+import { MapView } from './MapView';
 
 import "./style.scss";
 
-const TrackerMap = () => {
+const TrackerMap = ({ latitude, longitude }) => {
   return (
     <MapContainer
-      center={[51.505, -0.09]}
-      zoom={18}
+      center={[latitude, longitude]}
+      zoom={16}
       scrollWheelZoom={true}
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={[51.505, -0.09]} icon={MarkerIcon}></Marker>
+      <Marker position={[latitude, longitude]} icon={MarkerIcon}></Marker>
+      <MapView center={[latitude, longitude]} zoom={16}/>
     </MapContainer>
   );
 };
