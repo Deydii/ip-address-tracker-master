@@ -7,22 +7,18 @@ const TrackerInformations = ({ userIpInfos }) => {
     <div className="content">
       <div className="content__section">
         <h5 className="content__title">IP address</h5>
-        <br />
         <p className="content__text" data-testid="ip">{userIpInfos.ipAddress}</p>
       </div>
       <div className="content__section">
         <h5 className="content__title">Location</h5>
-        <br />
         <p className="content__text">{userIpInfos.city}, {userIpInfos.country}</p>
       </div>
       <div className="content__section">
         <h5 className="content__title">Timezone</h5>
-        <br />
         <p className="content__text">UTC {userIpInfos.timezone}</p>
       </div>
       <div className="content__section">
         <h5 className="content__title">ISP</h5>
-        <br />
         <p className="content__text">{userIpInfos.isp}</p>
         </div>
     </div>
