@@ -3,6 +3,7 @@ import axios from 'axios';
 import useLoadData from '../../Hooks/';
 import Header from '../Header';
 import TrackerMap from '../Map';
+import Spinner from '../Spinner';
 
 import './style.scss';
 
@@ -72,6 +73,19 @@ const App = () => {
 
   return (
     <div className="tracker">
+      {loading && (
+        <>
+          <Header
+            userIpInfos={ipInfos}
+            inputValue={inputValue}
+            onChangeInputValue={onChangeInputValue}
+            searchIpInfos={searchIpInfos}
+            error={error}
+            errorMessage={errorMessage}
+          />
+          <Spinner />
+      </>
+      )}
       {!loading && (
         <>
           <Header
