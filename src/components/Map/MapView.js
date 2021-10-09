@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 
 export const MapView = ({ center, zoom }) => {
   const map = useMap();
-  map.setView(center, zoom);
+  map.flyTo(center, zoom, {
+    animated: true,
+    duration: 1
+  });
   return null;
 };
 
