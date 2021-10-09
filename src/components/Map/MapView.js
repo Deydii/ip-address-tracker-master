@@ -11,6 +11,6 @@ export const MapView = ({ center, zoom }) => {
 };
 
 MapView.propTypes = {
-  latitude: PropTypes.number.isRequired,
-  longitude: PropTypes.number.isRequired,
+  center: PropTypes.arrayOf(PropTypes.number).isRequired,
+  zoom: PropTypes.number.isRequired,
 };
