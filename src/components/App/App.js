@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import useLoadData from '../../Hooks/';
+import useLoadData from '../../Hooks';
 import Header from '../Header';
 import TrackerMap from '../Map';
 import Spinner from '../Spinner';
@@ -8,25 +8,23 @@ import Spinner from '../Spinner';
 import './style.scss';
 
 const App = () => {
-  const [loading, infos] = useLoadData();
+  const [loading, infos] = useLoadData('http://ipwhois.app/json/');
   const [ipInfos, setIpInfos] = useState({});
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const getInfosInFirstRender = () => {
-    if (infos) {
-      setIpInfos({
-        ...ipInfos,
-        ipAddress: infos.ipAddress,
-        country: infos.country,
-        city: infos.city,
-        latitude: infos.latitude,
-        longitude: infos.longitude,
-        timezone: infos.timezone,
-        isp: infos.isp,
-      });
-    }
+    setIpInfos({
+      ...ipInfos,
+      ipAddress: infos.ipAddress,
+      country: infos.country,
+      city: infos.city,
+      latitude: infos.latitude,
+      longitude: infos.longitude,
+      timezone: infos.timezone,
+      isp: infos.isp,
+    });
   };
 
   const onChangeInputValue = (value) => {
@@ -40,7 +38,7 @@ const App = () => {
       .get(`http://ipwhois.app/json/${value}`)
       .then((response) => {
         switch (response.data.message) {
-          case "invalid IP address": 
+          case "invalid IP address":
             setError(true);
             setErrorMessage("Invalid IP address");
             break;
@@ -48,7 +46,7 @@ const App = () => {
             setError(true);
             setErrorMessage("Monthly API request has been reached.");
             break;
-          default: 
+          default:
             setError(false);
             setErrorMessage("");
             setIpInfos({
@@ -58,10 +56,10 @@ const App = () => {
               city: response.data.city,
               latitude: response.data.latitude,
               longitude: response.data.longitude,
-              timezone: response.data.timezone_gmt.slice(4),
+              timezone: response.data.timezone_gmt,
               isp: response.data.isp,
             });
-          }
+        }
       })
       .catch((error) => console.log(error));
   };
@@ -73,35 +71,21 @@ const App = () => {
 
   return (
     <div className="tracker">
-      {loading && (
-        <>
-          <Header
-            userIpInfos={ipInfos}
-            inputValue={inputValue}
-            onChangeInputValue={onChangeInputValue}
-            searchIpInfos={searchIpInfos}
-            error={error}
-            errorMessage={errorMessage}
-          />
-          <Spinner />
-      </>
-      )}
+      <Header
+        userIpInfos={ipInfos}
+        inputValue={inputValue}
+        onChangeInputValue={onChangeInputValue}
+        searchIpInfos={searchIpInfos}
+        error={error}
+        errorMessage={errorMessage}
+      />
+      {loading && <Spinner />}
       {!loading && (
-        <>
-          <Header
-            userIpInfos={ipInfos}
-            inputValue={inputValue}
-            onChangeInputValue={onChangeInputValue}
-            searchIpInfos={searchIpInfos}
-            error={error}
-            errorMessage={errorMessage}
-          />
-          <TrackerMap 
-            latitude={ipInfos.latitude}
-            longitude={ipInfos.longitude}
-          />
-        </>
-      )}
+        <TrackerMap 
+          latitude={ipInfos.latitude}
+          longitude={ipInfos.longitude}
+        />
+      )} 
     </div>
   );
 };

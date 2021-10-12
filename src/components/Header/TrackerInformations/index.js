@@ -15,7 +15,7 @@ const TrackerInformations = ({ userIpInfos }) => {
       </div>
       <div className="content__section">
         <h5 className="content__title">Timezone</h5>
-        <p className="content__text">UTC {userIpInfos.timezone}</p>
+        <p className="content__text">UTC {userIpInfos.timezone ? userIpInfos.timezone.slice(4) :  ""}</p>
       </div>
       <div className="content__section">
         <h5 className="content__title">ISP</h5>

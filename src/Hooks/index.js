@@ -1,13 +1,14 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const useLoadData = () => {
-  const [loading, setLoading] = useState(true);
+const useLoadData = (url) => {
+  const [loading, setLoading] = useState(false);
   const [infos, setInfos] = useState({});
 
   useEffect(() => {
+    setLoading(true);
     axios
-      .get("http://ipwhois.app/json/")
+      .get(url)
       .then((response) => {
         setInfos({
           ipAddress: response.data.ip,
@@ -15,15 +16,15 @@ const useLoadData = () => {
           city: response.data.city,
           latitude: response.data.latitude,
           longitude: response.data.longitude,
-          timezone: response.data.timezone_gmt.slice(4),
+          timezone: response.data.timezone_gmt,
           isp: response.data.isp,
         });
       })
       .catch((error) => console.log(error))
-      .finally(() => setLoading(false));
-  }, []);
+      .finally(() => setLoading(false))
+  }, [url]);
 
-  return [ loading, infos ];
+  return [loading, infos];
 };
 
 export default useLoadData;

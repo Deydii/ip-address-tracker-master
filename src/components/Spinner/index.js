@@ -4,7 +4,7 @@ import './style.scss';
 
 const Spinner = () => {
   return(
-    <div className="spinner">
+    <div className="spinner" data-testid="spinner">
         <FadeLoader 
           color={"#5A78E1"} 
           loading={true} 
