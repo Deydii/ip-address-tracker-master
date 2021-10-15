@@ -7,7 +7,7 @@ const TrackerInformations = ({ userIpInfos }) => {
     <div className="content">
       <div className="content__section">
         <h5 className="content__title">IP address</h5>
-        <p className="content__text" data-testid="ip">{userIpInfos.ipAddress}</p>
+        <p className="content__text">{userIpInfos.ipAddress}</p>
       </div>
       <div className="content__section">
         <h5 className="content__title">Location</h5>

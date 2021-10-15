@@ -23,8 +23,7 @@ describe('Tracker Informations component', () => {
     render(
       <TrackerInformations userIpInfos={props} />
     );
-    const pEl = screen.getByTestId("ip");
-    expect(pEl).toBeInTheDocument();
-    expect(pEl.textContent).toBe(props.ipAddress);
+    const ip = screen.getByText(props.ipAddress);
+    expect(ip).toBeInTheDocument();
   });
 });
