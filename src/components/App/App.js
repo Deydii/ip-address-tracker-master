@@ -8,7 +8,7 @@ import Spinner from '../Spinner';
 import './style.scss';
 
 const App = () => {
-  const [loading, infos] = useLoadData('http://ipwhois.app/json/');
+  const [loading, infos] = useLoadData('https://ipwhois.app/json/');
   const [ipInfos, setIpInfos] = useState({});
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState(false);
@@ -35,7 +35,7 @@ const App = () => {
 
   const searchIpInfos = (value) => {
     axios
-      .get(`http://ipwhois.app/json/${value}`)
+      .get(`https://ipwhois.app/json/${value}`)
       .then((response) => {
         switch (response.data.message) {
           case "invalid IP address":
