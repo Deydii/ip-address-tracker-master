@@ -1,18 +1,28 @@
 @use '../../../styles/vars' as v;
+@use '../../../styles/mixins' as m;
 
 .content {
   display: flex;
   position: relative;
   z-index: 15;
-  width: 90%;
+  width: 85%;
   max-width: 890px;
   height: 130px;
   background: white;
   border-radius: 10px;
+  @include m.breakpoint(mobile) {
+    flex-direction: column;
+    height: auto;
+    padding-bottom: 20px;
+  }
   &__section {
     padding: 30px 0 0 25px;
     width: 100%;
     position: relative;
+    @include m.breakpoint(mobile) {
+      padding: 25px 0 0 0;
+      text-align: center;
+    }
     &:not(:last-child)::after {
       content: "";
       position: absolute;
@@ -22,6 +32,9 @@
       height: 50%;
       background: v.$color-dark-gray;
       opacity: .5;
+      @include m.breakpoint(mobile) {
+        display: none;
+      }
     }
   }
   &__title {
@@ -31,6 +44,9 @@
     color: v.$color-dark-gray;
     font-weight: v.$font-weight-medium;
     letter-spacing: .7px;
+    @include m.breakpoint(mobile) {
+      font-size: 11px;
+    }  
   }
   &__text {
     width: 80%;
@@ -38,5 +54,9 @@
     font-size: 20px;
     color: v.$color-very-dark-gray;
     font-weight: v.$font-weight-medium;
+    @include m.breakpoint(mobile) {
+      width: 100%;
+      font-size: 18px;
+    }
   }
 }

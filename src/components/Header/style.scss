@@ -1,9 +1,16 @@
 @use "../../styles/vars" as v;
+@use '../../styles/mixins' as m;
 
 .header {
   height: 230px;
   width: 100%;
   position: relative;
+  @include m.breakpoint(tablet) {
+    height: 300px;
+  }
+  @include m.breakpoint(mobile) {
+    height: 400px;
+  }
   &__background {
     width: 100%;
     height: 100%;
