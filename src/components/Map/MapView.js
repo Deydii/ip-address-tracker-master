@@ -5,6 +5,7 @@ export const MapView = ({ center, zoom }) => {
   const map = useMap();
   map.flyTo(center, zoom, {
     animated: true,
+    duration: .50
   }
   );
   return null;
