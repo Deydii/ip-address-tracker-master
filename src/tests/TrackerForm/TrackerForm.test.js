@@ -80,8 +80,8 @@ describe('Tracker Form component', () => {
       />
     );
 
-  const divEl = screen.getByTestId("error-message");
-  expect(divEl).toHaveTextContent("Invalid IP address");
+  const divEl = screen.getByText("Invalid IP address");
+  expect(divEl).toBeInTheDocument();
   });
 
   test('Error message should have form__message--hide className when user is typing', () => {
